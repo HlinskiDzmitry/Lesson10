@@ -15,7 +15,7 @@ public class Animal {
         if (distance <= maxRunDistance) {
             System.out.println(name + " пробежал " + distance + " м.");
         } else {
-            System.out.println(name + " не смог пробежать " + distance + " м.");
+            System.out.println(name + " не  смог пробежать " + distance + " м.");
         }
     }
 
