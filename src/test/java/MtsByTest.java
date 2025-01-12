@@ -21,9 +21,15 @@ public class MtsByTest {
     }
 
     @Test
-    public void testBlockTitleAndLogos() {
+    public void testBlockTitle() {
         mainPage.acceptCookies();
         Assert.isTrue(mainPage.getBlockTitleText().contains("Онлайн пополнение"), "Название блока некорректно.");
+        Assert.isTrue(mainPage.getPaymentLogosCount() > 0, "Логотипы платёжных систем отсутствуют.");
+    }
+
+    @Test
+    public void testPaymentLogos(){
+        mainPage.acceptCookies();
         Assert.isTrue(mainPage.getPaymentLogosCount() > 0, "Логотипы платёжных систем отсутствуют.");
     }
 
