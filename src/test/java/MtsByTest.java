@@ -1,10 +1,18 @@
 import dev.failsafe.internal.util.Assert;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+
 import java.util.List;
 
 public class MtsByTest {
@@ -21,19 +29,27 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест названия блока пополнения")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testBlockTitle() {
         mainPage.acceptCookies();
         Assert.isTrue(mainPage.getBlockTitleText().contains("Онлайн пополнение"), "Название блока некорректно.");
-        Assert.isTrue(mainPage.getPaymentLogosCount() > 0, "Логотипы платёжных систем отсутствуют.");
     }
 
     @Test
+    @Description("Тест на наличие логотипов платежных систем в блоке пополнения")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.NORMAL)
     public void testPaymentLogos(){
         mainPage.acceptCookies();
         Assert.isTrue(mainPage.getPaymentLogosCount() > 0, "Логотипы платёжных систем отсутствуют.");
     }
 
     @Test
+    @Description("Тест ссылки дополнительной информации")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.MINOR)
     public void testMoreInfoLink() {
         mainPage.acceptCookies();
         mainPage.clickMoreInfoLink();
@@ -41,12 +57,18 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест текста опции 'Услуги связи' ")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testServiceOptionText() {
         mainPage.acceptCookies();
         Assert.isTrue(mainPage.getServiceOptionText().contains("Услуги связи"), "Не выбраны услуги связи.");
     }
 
     @Test
+    @Description("Тест вызова модального окна оплаты")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.CRITICAL)
     public void testPhoneNumberInputAndPaymentModal() {
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -56,6 +78,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест названия всех опций формы пополнения")
+    @Epic("Тесты главной страницы")
+    @Severity(SeverityLevel.NORMAL)
     public void testServiceOptionsText() {
         mainPage.acceptCookies();
 
@@ -66,6 +91,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест соответствия введенной и в модальном окне оплаты суммы")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.NORMAL)
     public void testPayDescriptionCost() {
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -75,6 +103,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест соответствия введенного и в модальном окне оплаты номера телефона")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.NORMAL)
     public void testPayDescriptionText() {
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -86,6 +117,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест соответствия введенной и в модальном окне оплаты, на кнопке оплаты суммы")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.NORMAL)
     public void testPayButtonCost() {
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -96,6 +130,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест плейсхолдера номера карты в модальном окне оплаты")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPlaceHolderNumber(){
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -107,6 +144,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест плейсхолдера си-ви-си карты в модальном окне оплаты")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPlaceHolderCVC(){
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -117,6 +157,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест плейсхолдера срока действия карты в модальном окне оплаты")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPlaceHolderValidity(){
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -127,6 +170,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест плейсхолдера имени держателя карты в модальном окне оплаты")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testPlaceHolderName(){
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
@@ -137,6 +183,9 @@ public class MtsByTest {
     }
 
     @Test
+    @Description("Тест логотипов платежных систем в модальном окне оплаты")
+    @Epic("Тесты модального окна оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testCountPaymentCardPage(){
         mainPage.acceptCookies();
         mainPage.enterPhoneNumber("297777777");
